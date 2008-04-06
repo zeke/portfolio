@@ -6,12 +6,18 @@ package com.sikelianos {
 	import com.sikelianos.*;
 	import caurina.transitions.*;
 
+	import com.abdulqabiz.crypto.Base64;
+	
+
+
+
 	public class Meat extends MovieClip {
 	  
 	  var _spaceBetweenPosts:Number = 30;
 		var _y_init:Number = 30;
 		var _offset:Number = 0;
-				
+		
+			
 		public function Meat() {
 		  name = "meat";
 			addEventListener(Event.ADDED_TO_STAGE, init)
@@ -19,21 +25,34 @@ package com.sikelianos {
 		
 		function init(e:Event) {
 			adaptToScale(true);
-		  
-			var xmlLoader:URLLoader = new URLLoader();
-			xmlLoader.addEventListener(Event.COMPLETE, buildContent); 
-			// https://sikelianos.backpackit.com/ws/page/1054295
-			xmlLoader.load(new URLRequest("http://zeke.tumblr.com/api/read"));
-			
+
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler)
+			
+		
+			// Loader stuff
+			var authHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + Base64.encode("sikelianos:ereiamJH"));
+
+			var urlRequest:URLRequest = new URLRequest();
+			urlRequest.requestHeaders.push(authHeader);			
+			urlRequest.url = "http://sikelianos.backpackit.com/ws/page/1054295";
+			urlRequest.method = URLRequestMethod.GET;
+
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.addEventListener(Event.COMPLETE, buildContent);
+			urlLoader.load(urlRequest);			
 		}
+				
 
 		function buildContent(e:Event):void {
 			var xml_data = new XML(e.target.data);
-			var posts:XMLList = xml_data.posts.post
+			// var posts:XMLList = xml_data.posts.post
+			trace( xml_data)
+			var posts:XMLList = xml_data.belongings.belonging
+			trace("blah")
+			// trace(posts.length);
 			for each (var postData:XML in posts) {
-				var post:Post = new Post(postData)
-				addChild(post);
+				// var post:Post = new Post(postData)
+				// addChild(post);
 			}
 		}
 		

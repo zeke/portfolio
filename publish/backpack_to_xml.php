@@ -1,6 +1,6 @@
 <?php
 	include('SimpleBackpack.php');
-	$bp = new SimpleBackpack('username', 'token');
+	$bp = new SimpleBackpack('sikelianos', 'ereiamJH');
 	$result = $bp->export_backpack();
 	echo $result;
 ?>

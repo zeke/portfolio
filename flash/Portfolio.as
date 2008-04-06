@@ -17,8 +17,7 @@ package {
       stage.scaleMode = StageScaleMode.NO_SCALE;
       stage.addEventListener(Event.RESIZE, resizeHandler);
 
-
-
+			
 			SimpleMouseEventHandler.register(stage);
 			stage.addEventListener(SimpleMouseEvent.PRESS, pressHandler);
 			// stage.addEventListener(SimpleMouseEvent.RELEASE, releaseHandler);
