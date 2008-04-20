@@ -19,14 +19,15 @@ package com.sikelianos {
 		  setPrevPost();
 		  
 		  var guts = null;
-		  var postType:String = _data.attribute("type");
+		  var postType:String = _data.widget.attribute("type");
+			trace ("postType: " + postType);
 			switch(postType) {
-				case "regular":
-          guts = new Regular();
+				case "note":
+			          guts = new Note();
 					break;
-				case "photo":
-					guts = new Photo();
-					break;
+				// case "gallery":
+				// 	guts = new Gallery();
+				// 	break;
 				default:
 					trace("unknown post type");
 			}

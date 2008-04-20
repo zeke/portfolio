@@ -17,6 +17,9 @@ package com.sikelianos {
 		var _y_init:Number = 30;
 		var _offset:Number = 0;
 		
+		var _belongings:XMLList;
+		var _notes:XMLList;
+		var _galleries:XMLList;
 			
 		public function Meat() {
 		  name = "meat";
@@ -28,13 +31,10 @@ package com.sikelianos {
 
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler)
 			
-		
 			// Loader stuff
-			var authHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + Base64.encode("sikelianos:ereiamJH"));
-
 			var urlRequest:URLRequest = new URLRequest();
-			urlRequest.requestHeaders.push(authHeader);			
-			urlRequest.url = "http://sikelianos.backpackit.com/ws/page/1054295";
+			// urlRequest.url = "http://zeke.sikelianos.com/portfolio/backpack_to_xml.php";
+			urlRequest.url = "test.xml";
 			urlRequest.method = URLRequestMethod.GET;
 
 			var urlLoader:URLLoader = new URLLoader();
@@ -45,14 +45,14 @@ package com.sikelianos {
 
 		function buildContent(e:Event):void {
 			var xml_data = new XML(e.target.data);
-			// var posts:XMLList = xml_data.posts.post
-			trace( xml_data)
-			var posts:XMLList = xml_data.belongings.belonging
-			trace("blah")
-			// trace(posts.length);
-			for each (var postData:XML in posts) {
-				// var post:Post = new Post(postData)
-				// addChild(post);
+			
+			_belongings:XMLList = xml_data.page.belongings.belonging
+			_notes:XMLList = xml_data.page.notes.note
+			_galleries:XMLList = xml_data.page.galleries.gallery
+			
+			for each (var postData:XML in _belongings) {
+				var post:Post = new Post(postData)
+				addChild(post);
 			}
 		}
 		
