@@ -29,8 +29,8 @@ package com.sikelianos {
 			
 			// Loader stuff
 			var urlRequest:URLRequest = new URLRequest();
-			// urlRequest.url = "http://zeke.sikelianos.com/portfolio/backpack_to_xml.php";
-			urlRequest.url = "http://localhost:8888/backpack_to_xml.php";
+      urlRequest.url = "http://zeke.sikelianos.com/portfolio/backpack_to_xml.php";
+      // urlRequest.url = "http://localhost:8888/backpack_to_xml.php";
 			urlRequest.method = URLRequestMethod.GET;
 
 			var urlLoader:URLLoader = new URLLoader();
@@ -42,19 +42,21 @@ package com.sikelianos {
 		function buildContent(e:Event):void {
 		  // See sample.xml for example backpack XML structure
 			var xml_data = new XML(e.target.data);
-			var belongings = xml_data.page.belongings.belonging
-      var notes = xml_data.page.notes.note
-      var galleries = xml_data.page.galleries.gallery
+			_belongings = xml_data.page.belongings.belonging
+      _notes = xml_data.page.notes.note
+      _galleries = xml_data.page.galleries.gallery
       
-      for (var k in flash_vars) Globals.vars[k] = flash_vars[k]
-      
-      // trace("belongings: " + _belongings);
-      for each (var belonging:XML in belongings) {
-        var post_type = belonging.widget.attribute("type").toLowerCase();
-        var post_id = belonging.widget.attribute("id");
-        var post_data = this[Inflector.pluralize(post_type)].elements(  )
-        var post:Post = new Post(postData)
-        addChild(post);
+      for each (var belonging:XML in _belongings) {
+        var post_type = belonging.widget.@type.toLowerCase();
+        var post_id = belonging.widget.@id;
+        var post_parent = this["_" + Inflector.pluralize(post_type)] // e.g. this._notes, or this._galleries
+
+        // e.g. cycle through the _notes looking for the current note by id
+        for each (var post_data:XML in post_parent)  { 
+          if (post_data.@id == post_id) {
+            addChild(new Post(post_id, post_type, post_data));
+          }
+        }
       }
 		}
 		
