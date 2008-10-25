@@ -23,17 +23,10 @@ package {
 			// stage.addEventListener(SimpleMouseEvent.RELEASE, releaseHandler);
 			stage.addEventListener(MouseEvent.MOUSE_UP, releaseHandler)
 		  		  
-			var logo:Logo = new Logo();
-			addChild(logo);
-		  
-			var nav:Nav = new Nav();
-			addChild(nav);
-
-			var meat:Meat = new Meat();
-			addChild(meat);
-			
-			var wheel:Wheel = new Wheel();
-			addChild(wheel);
+			addChild(new Logo());
+			addChild(new Nav());
+			addChild(new Meat());
+			addChild(new Wheel());
 		}
 		
 		function resizeHandler(event:Event) {

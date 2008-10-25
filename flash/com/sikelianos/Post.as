@@ -3,39 +3,40 @@ package com.sikelianos {
 	import flash.events.*;
 	import flash.xml.*;
 	import com.tumblr.types.*
+	import com.backpackit.*
 
 	public class Post extends MovieClip {
 			
-		public var _data:XML;
-		var _prevPost = null;
-		var _nextPost = null;
+		public var _type:String
+		public var _data:XML
+		var _prevPost = null
+		var _nextPost = null
 		
-		public function Post(postData:XML) {
-		  _data = postData;
-			addEventListener(Event.ADDED_TO_STAGE, init);
+		public function Post(type:String, data:XML) {
+      _type = type
+		  _data = data
+			addEventListener(Event.ADDED_TO_STAGE, init)
 		}
 		
 		public function init(e:Event) {
 		  setPrevPost();
 		  
 		  var guts = null;
-		  var postType:String = _data.widget.attribute("type");
-			trace ("postType: " + postType);
-			switch(postType) {
+			switch(_type) {
 				case "note":
-			          guts = new Note();
+          guts = new Note();
 					break;
 				// case "gallery":
 				// 	guts = new Gallery();
 				// 	break;
 				default:
-					trace("unknown post type");
+					trace("unknown post type: " _type);
 			}
 			
-			if (guts) {
+			if (guts != null) {
+			  trace("add gut child")
 			  guts.name = "guts";
         addChild(guts);
-        guts.init();
 			}
 			
 		}

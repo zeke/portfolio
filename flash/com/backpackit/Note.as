@@ -7,9 +7,11 @@ package com.backpackit {
 	public class Note extends MovieClip {
 
 		public function Note() {
+      addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		public function init() {
+		public function init(e:Event) {
+		  trace("note init")
 		  // Font
 		  var officina_sans:Font = new OfficinaSans();
 			var format:TextFormat = new TextFormat();

@@ -5,11 +5,7 @@ package com.sikelianos {
 	import flash.xml.*;
 	import com.sikelianos.*;
 	import caurina.transitions.*;
-
-	import com.abdulqabiz.crypto.Base64;
-	
-
-
+	import com.rxr.currents.util.Inflector
 
 	public class Meat extends MovieClip {
 	  
@@ -34,26 +30,32 @@ package com.sikelianos {
 			// Loader stuff
 			var urlRequest:URLRequest = new URLRequest();
 			// urlRequest.url = "http://zeke.sikelianos.com/portfolio/backpack_to_xml.php";
-			urlRequest.url = "test.xml";
+			urlRequest.url = "http://localhost:8888/backpack_to_xml.php";
 			urlRequest.method = URLRequestMethod.GET;
 
 			var urlLoader:URLLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, buildContent);
 			urlLoader.load(urlRequest);			
 		}
-				
+		
 
 		function buildContent(e:Event):void {
+		  // See sample.xml for example backpack XML structure
 			var xml_data = new XML(e.target.data);
-			
-			_belongings:XMLList = xml_data.page.belongings.belonging
-			_notes:XMLList = xml_data.page.notes.note
-			_galleries:XMLList = xml_data.page.galleries.gallery
-			
-			for each (var postData:XML in _belongings) {
-				var post:Post = new Post(postData)
-				addChild(post);
-			}
+			var belongings = xml_data.page.belongings.belonging
+      var notes = xml_data.page.notes.note
+      var galleries = xml_data.page.galleries.gallery
+      
+      for (var k in flash_vars) Globals.vars[k] = flash_vars[k]
+      
+      // trace("belongings: " + _belongings);
+      for each (var belonging:XML in belongings) {
+        var post_type = belonging.widget.attribute("type").toLowerCase();
+        var post_id = belonging.widget.attribute("id");
+        var post_data = this[Inflector.pluralize(post_type)].elements(  )
+        var post:Post = new Post(postData)
+        addChild(post);
+      }
 		}
 		
 		public function positionPosts() {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response success="true">
+
+	<page title="Portfolio" id="1054295" email_address="isaac29yvette@sikelianos.backpackit.com">    
+
+		<belongings>
+			<belonging id="4485820">
+				<position>1</position>
+				<widget type="Note" id="2688194"/>
+			</belonging>
+			<belonging id="4486027">
+				<position>2</position>
+				<widget type="Gallery" id="274453"/>
+			</belonging>
+		</belongings>
+
+		<notes>
+			<note title="" id="2688194" created_at="2008-03-06 20:39:27">this is the text of the note</note>
+			<note title="Woodrow Wilson Quote" id="2688261" created_at="2008-03-06 20:55:18">this is the woodrow wilson quote</note>
+		</notes>    
+		
+		<galleries>
+			<gallery name="Gallery" id="274448">
+				<images>
+					<image gallery_id="274448" file_name="yny9_monkey1.png" id="1961917" description="Tee concept for Climbing Competition: Yank &#8216;n Yard 9"/>
+				</images>
+			</gallery>
+			<gallery name="Gallery" id="274451">
+				<images>
+					<image gallery_id="274451" file_name="boba_500.jpg" id="1962051" description="Website for Boba Tea Company"/>
+				</images>
+			</gallery>
+		</galleries>
+		
+  </page>
+</response>
