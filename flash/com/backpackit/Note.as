@@ -3,6 +3,7 @@ package com.backpackit {
 	import flash.events.*;
 	import flash.text.*
 	import flash.xml.*;
+	import com.sikelianos.utils.*;
 
 	public class Note extends MovieClip {
 
@@ -12,6 +13,11 @@ package com.backpackit {
 		
 		public function init(e:Event) {
 		  trace("note init")
+			buildContent()
+      MovieClip(this.parent.parent).positionBelongings()
+		}
+		
+		private function buildContent() {
 		  // Font
 		  var officina_sans:Font = new OfficinaSans();
 			var format:TextFormat = new TextFormat();
@@ -31,9 +37,9 @@ package com.backpackit {
 		  txt.height = 300;
 			txt.defaultTextFormat = format;
 
-			txt.htmlText = MovieClip(parent)._data["regular-body"];
-			addChild(txt);
+			txt.htmlText = MovieClip(parent)._data
+			addChild(txt);		  
 		}
-				
+		
 	}
 }

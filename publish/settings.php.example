@@ -1,0 +1,7 @@
+<?
+
+	$username = "sikelianos"; // Backpack Username
+	$token = "somecrazystringamathing"; // Backpack API Key.. See 'My Info' on Backpack account page
+	$page = "1234567";
+
+?>

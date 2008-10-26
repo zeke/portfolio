@@ -37,9 +37,9 @@ package com.sikelianos {
 		
 		public function adaptToScale() {
 			var padding = MovieClip(parent)._padding;
-			var meatWidth = MovieClip(parent)._meatWidth;
-			var right_edge_of_meat = meatWidth + padding*2;
-			x = right_edge_of_meat;
+			var pageWidth = MovieClip(parent)._pageWidth;
+			var right_edge_of_page = pageWidth + padding*2;
+			x = right_edge_of_page;
 			y = 30 + height/2;
 		}
 		

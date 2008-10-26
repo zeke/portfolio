@@ -4,12 +4,13 @@ package com.sikelianos {
 	import flash.net.*;
 	import flash.xml.*;
 	import com.sikelianos.*;
+	import com.sikelianos.utils.*;
 	import caurina.transitions.*;
 	import com.rxr.currents.util.Inflector
 
-	public class Meat extends MovieClip {
+	public class Page extends MovieClip {
 	  
-	  var _spaceBetweenPosts:Number = 30;
+	  var _spaceBetweenBelongings:Number = 30;
 		var _y_init:Number = 30;
 		var _offset:Number = 0;
 		
@@ -17,8 +18,8 @@ package com.sikelianos {
 		var _notes:XMLList;
 		var _galleries:XMLList;
 			
-		public function Meat() {
-		  name = "meat";
+		public function Page() {
+		  name = "page";
 			addEventListener(Event.ADDED_TO_STAGE, init)
 		}
 		
@@ -29,8 +30,7 @@ package com.sikelianos {
 			
 			// Loader stuff
 			var urlRequest:URLRequest = new URLRequest();
-      urlRequest.url = "http://zeke.sikelianos.com/portfolio/backpack_to_xml.php";
-      // urlRequest.url = "http://localhost:8888/backpack_to_xml.php";
+      urlRequest.url = Globals.vars.backpack_xml_url
 			urlRequest.method = URLRequestMethod.GET;
 
 			var urlLoader:URLLoader = new URLLoader();
@@ -47,26 +47,26 @@ package com.sikelianos {
       _galleries = xml_data.page.galleries.gallery
       
       for each (var belonging:XML in _belongings) {
-        var post_type = belonging.widget.@type.toLowerCase();
-        var post_id = belonging.widget.@id;
-        var post_parent = this["_" + Inflector.pluralize(post_type)] // e.g. this._notes, or this._galleries
+        var belonging_type = belonging.widget.@type.toLowerCase();
+        var belonging_id = belonging.widget.@id;
+        var belonging_parent = this["_" + Inflector.pluralize(belonging_type)] // e.g. this._notes, or this._galleries
 
-        // e.g. cycle through the _notes looking for the current note by id
-        for each (var post_data:XML in post_parent)  { 
-          if (post_data.@id == post_id) {
-            addChild(new Post(post_id, post_type, post_data));
+        // Cycle through the _notes (or _galleries, etc) looking for the current note (or gallery, etc) by id
+        for each (var belonging_data:XML in belonging_parent)  { 
+          if (belonging_data.@id == belonging_id) {
+            addChild(new Belonging(belonging_id, belonging_type, belonging_data));
           }
         }
       }
 		}
 		
-		public function positionPosts() {
+		public function positionBelongings() {
 		  var top_edge = 0;
-		  var post = null;
+		  var belonging = null;
 		  for (var i=0; i<numChildren; i++) {
-		    post = getChildAt(i);
-		    post.y = top_edge;
-		    top_edge += (post.height>0) ? (post.height + _spaceBetweenPosts) : 0;
+		    belonging = getChildAt(i);
+		    belonging.y = top_edge;
+		    top_edge += (belonging.height>0) ? (belonging.height + _spaceBetweenBelongings) : 0;
 		  }
 		}
 		

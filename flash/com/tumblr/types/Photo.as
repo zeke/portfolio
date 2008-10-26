@@ -35,7 +35,7 @@ package com.tumblr.types {
   	  var img = event.target
       // trace("image loaded: " + img.width)
       // draw_border_around_image();
-      MovieClip(this.parent.parent).positionPosts();
+      MovieClip(this.parent.parent).positionBelongings();
   	}
   	
   	function draw_border_around_image() {

@@ -7,7 +7,7 @@ package com.sikelianos {
 	public class Wheel extends MovieClip {
 		
 		var _rotationChangeSinceActivated = null;
-		var _meatOffsetWhenActivated;
+		var _pageOffsetWhenActivated;
 		var _lastAngle = null;
 		
 		public function Wheel() {
@@ -83,8 +83,8 @@ package com.sikelianos {
 /*		
 		private function pressHandler(event:SimpleMouseEvent):void {
       _rotationChangeSinceActivated = 0;
-			var meat = MovieClip(parent).getChildByName("meat");
-			_meatOffsetWhenActivated = meat._offset;
+			var page = MovieClip(parent).getChildByName("page");
+			_pageOffsetWhenActivated = page._offset;
 			
       addEventListener(Event.ENTER_FRAME, enterFrameHandler)
 		}
@@ -96,8 +96,8 @@ package com.sikelianos {
 	
 		public function pressHandler():void {
 	    _rotationChangeSinceActivated = 0;
-			var meat = MovieClip(parent).getChildByName("meat");
-			_meatOffsetWhenActivated = meat._offset;
+			var page = MovieClip(parent).getChildByName("page");
+			_pageOffsetWhenActivated = page._offset;
 	    addEventListener(Event.ENTER_FRAME, enterFrameHandler)
 		}
 	
@@ -125,12 +125,12 @@ package com.sikelianos {
   		  _lastAngle = angle;
   		  getChildByName("wheel_display").rotation = _lastAngle;
 				
-				moveTheMeat();
+				moveThePage();
   		}
 		}
 		
-		function moveTheMeat() {
-			var meat = MovieClip(parent).getChildByName("meat");
+		function moveThePage() {
+			var page = MovieClip(parent).getChildByName("page");
 
 			// 1 offset unit per 45 degrees of wheel rotation..
 			var offset_change = _rotationChangeSinceActivated/45;
@@ -139,16 +139,16 @@ package com.sikelianos {
 			offset_change = (_rotationChangeSinceActivated > 0) ? Math.floor(offset_change) : Math.ceil(offset_change);
 			
 			
-			var offset = _meatOffsetWhenActivated - offset_change;
+			var offset = _pageOffsetWhenActivated - offset_change;
 			
-			// Keep offset within meat's bounds..
+			// Keep offset within page's bounds..
 			offset = (offset < 0) ? 0 : offset;
-			offset = (offset >= meat.numChildren) ? meat.numChildren - 1 : offset;
+			offset = (offset >= page.numChildren) ? page.numChildren - 1 : offset;
 			
-			// Tell the meat to move!
-			if (offset != meat._offset) {
-				// meat.seekOffset(offset);
-				meat._offset = offset;
+			// Tell the page to move!
+			if (offset != page._offset) {
+				// page.seekOffset(offset);
+				page._offset = offset;
 			}
 		}
 		

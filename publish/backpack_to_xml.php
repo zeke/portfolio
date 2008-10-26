@@ -1,8 +1,6 @@
 <?php
 
-$username = "sikelianos";
-$token = "aac9eee6defd8d18121a85a17fece3c6feb7aa69";
-$page = "1054295";
+include_once('settings.php')
 
 function curl_request($url, $request_body) {
 	$ch = curl_init();
