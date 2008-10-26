@@ -1,0 +1,14 @@
+h2. Overview
+
+This is the source for my portfolio site. It's built with Actionscript 3 (AS3) and leverages Backpack as a backend CMS. For the moment, it's also getting a little help from PHP, which does the HTTP authentication bit using cURL, and passes the resulting XML to Flash.
+
+h2. Notes
+
+* SSL must be disabled on the backpack account for this to work
+* Backpack API key can be enabled and retrieved on the 'My Info' page in Backpack.
+
+h3. Upcoming
+
+* TODO: See if the pages must be set to public to work.
+* TODO: Add AS3 HTTP authentication.. see http://code.google.com/p/as3httpclient/ or http://lab.arc90.com/2008/03/restservice.php
+* TODO: Move top-level XML parsing logic into the base document class
