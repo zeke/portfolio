@@ -22,7 +22,7 @@ package com.backpackit {
 		  var officina_sans:Font = new OfficinaSans();
 			var format:TextFormat = new TextFormat();
 		  format.font = officina_sans.fontName;
-			format.color = 0x666666;
+			format.color = 0x000000;
 			format.size = 16;
 			format.leading = 6;
 
